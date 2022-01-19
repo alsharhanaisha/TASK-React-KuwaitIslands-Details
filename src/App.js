@@ -1,25 +1,25 @@
-
-import './App.css';
-import Header from './Components/Header';
-import IslandForm from './Components/IslandForm';
-import IslandList from './Components/IslandList';
-
+import "./App.css";
+import { useState } from "react";
+import Header from "./Components/Header";
+import IslandForm from "./Components/IslandForm";
+import IslandList from "./Components/IslandList";
+import islandsData from "./data/islands";
 
 function App() {
+  const [islands, setIslands] = useState(islandsData);
+  const [island, setIsland] = useState(islands[6]);
 
-  let island = {
-    name: "Boubyan",
-    img: "http://photos.wikimapia.org/p/00/02/20/48/92_big.jpg"
-  }
-
+  const incrementVisitor = (island) => {
+    island.visitor++;
+    setIslands([...islands]);
+    alert("island is booked");
+  };
   return (
-
     <div>
       <Header />
-
       <div className="homePage">
-        <IslandList />
-        <IslandForm island={island} />
+        <IslandList setIsland={setIsland} />
+        <IslandForm island={island} incrementVisitor={incrementVisitor} />
       </div>
     </div>
   );
